@@ -36,7 +36,11 @@ fig.add_vline(
     line_dash="dash",
     line_color="red"
 )
-
+fig.update_layout(
+    plot_bgcolor="#2c3e50",   # fondo del área del gráfico
+    paper_bgcolor="#2c3e50",  # fondo externo
+    font=dict(color="white")
+)
 fig.add_annotation(
     x="2021-01-15",
     y=daily_sales["sales"].max(),
@@ -57,14 +61,16 @@ result_text = (
 )
 
 app.layout = html.Div([
-    html.H1("Soul Foods Sales Visualizer", style={"textAlign": "center"}),
+    html.H1("Soul Foods Sales Visualizer", className="title"),
 
     html.H3(result_text, style={"textAlign": "center"}),
 
     dcc.Graph(
         id="sales-line-chart",
-        figure=fig
+        figure=fig,
+        className="graph"
     )
+    
 ])
 
 # Run app
