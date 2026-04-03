@@ -1,24 +1,27 @@
 import pandas as pd
 
-# Load all CSVs
+# Cargar archivos originales
 df1 = pd.read_csv("data/daily_sales_data_0.csv")
 df2 = pd.read_csv("data/daily_sales_data_1.csv")
 df3 = pd.read_csv("data/daily_sales_data_2.csv")
 
-# Combine them
+# Unir datasets
 df = pd.concat([df1, df2, df3], ignore_index=True)
 
-# Filter for Pink Morsels
+# Filtrar solo Pink Morsels
 df = df[df["product"] == "pink morsel"]
 
-# Create sales column
+# Crear columna sales
 df["sales"] = df["quantity"] * df["price"]
 
-# Keep only relevant columns
+# Mantener columnas necesarias
 df = df[["date", "region", "sales"]]
 
-# Optional: ensure date is datetime
+# Convertir fecha
 df["date"] = pd.to_datetime(df["date"])
 
-# Preview result
-print(df.head())
+# Guardar CSV limpio
+df.to_csv("cleaned_data.csv", index=False)
+
+print("CSV limpio creado: cleaned_data.csv")
+
