@@ -65,12 +65,24 @@ app.layout = html.Div([
 
     html.H3(result_text, style={"textAlign": "center"}),
 
+    # 👇 AQUÍ agregas el region picker
+    dcc.Dropdown(
+        id="region-picker",
+        options=[
+            {"label": "North", "value": "north"},
+            {"label": "South", "value": "south"},
+            {"label": "East", "value": "east"},
+            {"label": "West", "value": "west"},
+        ],
+        value="north",  # valor por defecto
+        placeholder="Select a region"
+    ),
+
     dcc.Graph(
         id="sales-line-chart",
         figure=fig,
         className="graph"
     )
-    
 ])
 
 # Run app
